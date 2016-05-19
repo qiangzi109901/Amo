@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="temp_catalog">
+
+    <insert id="insert">
+        insert into
+            temp_catalog(name,lang,pid)
+        value(
+            {{name | q}},
+            {{lang | q}},
+            {{pid | q}}
+        )
+    </insert>
+
+    <select id="pageQuery">
+        select
+            t1.*,t2.name pname
+        from
+            temp_catalog t1
+        left join
+            temp_catalog t2 on t1.pid = t2.id
+        where
+            1 = 1
+            {{pid | and:'t1.pid'}}
+            {{lang | and:'t1.lang'}}
+            {{sort | orderBy}}
+            {{offset | limit:pageSize}}
+    </select>
+
+    <select id="pageCount">
+        select
+            count(1)
+        from
+            temp_catalog
+        where
+            1 = 1
+            {{pid | and:'pid'}}
+            {{lang | and:'lang'}}
+    </select>
+
+
+    <select id="getLanguages" more="true">
+        select
+            distinct lang id,lang text
+        from
+            temp_catalog
+    </select>
+
+    <select id="listByPid" more="true">
+        select
+            id,name text
+        from
+            temp_catalog
+        where
+            {{val | eq:'pid'}}
+            order by ordinal
+    </select>
+
+    <delete id="delete" before="checkDelete">
+        delete from
+            temp_catalog
+        where
+            {{id | eq:'id'}}
+    </delete>
+
+    <select id="checkDelete">
+        select
+            sum(total)
+        from(
+            (select count(1) total from temp_catalog where {{id | eq:'pid'}} limit 1)
+            union
+            (select count(1) total from template where {{id | eq:'catalog_id'}} limit 1)
+        ) s;
+    </select>
+
+    <update id="update">
+        update
+            temp_catalog
+        set
+            {{name | eq:'name'}},
+            {{lang | eq:'lang'}},
+            {{pid | eq:'pid'}}
+        where
+            {{id | eq:'id'}}
+    </update>
+
+
+</sql>

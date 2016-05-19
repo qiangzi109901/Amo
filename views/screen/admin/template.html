@@ -1,0 +1,41 @@
+<link href="/lib/prism/prism.css" rel="stylesheet" />
+<section class="search_section">
+    <div class="search_item">
+        <select  id="sLang" class="myselect select2" name="lang" placeholder="请选择语言" default_msg="所有语言" default_val="-1"></select>
+    </div>
+
+    <div class="search_item">
+        <select  id="sPid" class="myselect select2" name="catalog_id" placeholder="请选择分类" default_msg="所有分类" default_val="-1"></select>
+    </div>
+
+    <input type="text" class="minput" name="name" id="keyword" placeholder="检索"/>
+    <span id="sSubmit" class="mbtn">搜索</span>
+    <span id="aBtn" class="mbtn obtn" style="float:right">添加模板</span>
+</section>
+
+
+<table border="0" id="table_list" class="table">
+    <thead>
+    <th>编号</th>
+    <th>名称</th>
+    <th>分类</th>
+    <th>创建时间</th>
+    <th>修改时间</th>
+    <th>操作</th>
+    </thead>
+
+    <tbody id="lists">
+
+    </tbody>
+</table>
+
+<div id="pagination">
+    <div class="mypage" id="mypage"></div>
+</div>
+
+</div>
+</div>
+
+{{include './template/template_list'}}
+
+<script type="text/javascript" src="/js/admin/template.js"></script>

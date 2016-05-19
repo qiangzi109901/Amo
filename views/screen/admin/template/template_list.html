@@ -1,0 +1,47 @@
+<script id="temp_model_list" type="text/html">
+    [[each models as model index]]
+    <tr class="parent-line">
+        <td>[[index]]</td>
+        <td>[[model.name]]</td>
+        <td>[[model.pname]]</td>
+        <td>[[model.gmt_create]]</td>
+        <td>[[model.gmt_update]]</td>
+        <td>
+            <a data-id="[[model.id]]" class="item_update">更新</a>
+            <a data-id="[[model.id]]" class="item_delete">删除</a>
+        </td>
+    </tr>
+    <tr class="child-line">
+        <td colspan="6">
+            <pre><code class="language-[[model.lang]]">[[model.content]]</code></pre>
+        </td>
+    </tr>
+    [[/each]]
+</script>
+
+<!--模态框-->
+<div class="mywindow" id="aModal" data-width="900px" data-height="500px">
+    <div class="mywindow_head">
+        <span class="mywindow_title">添加模板</span>
+        <span class="mywindow_close_btn">✕</span>
+    </div>
+    <div class="mywindow_body">
+        <iframe id="aFrame" class="mframe" width="900" height="500px"  src="/admin/frame/add_template"></iframe>
+    </div>
+</div>
+
+
+<!--模态框-->
+<div class="mywindow" id="uModal" data-width="900px" data-height="500px">
+    <div class="mywindow_head">
+        <span class="mywindow_title">更新模板</span>
+        <span class="mywindow_close_btn">✕</span>
+    </div>
+    <div class="mywindow_body">
+        <iframe id="uFrame" class="mframe" width="900" height="500px" ></iframe>
+    </div>
+</div>
+
+
+
+

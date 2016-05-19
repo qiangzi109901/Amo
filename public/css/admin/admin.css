@@ -1,0 +1,440 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    font-family: Monaco, Menlo,Consolas,"helvetica neue", "Microsoft YaHei", arial, sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #2ea5ff;
+    cursor: pointer;
+}
+#header{
+    height:80px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #D4D4D4;
+}
+#logo_title{
+    color:#2ea5ff;
+    display: inline-block;
+    font-weight: lighter;
+    font-size:40px;
+    margin-top:15px;
+    margin-left:40px;
+}
+
+#user_info{
+    float:right;
+}
+#user_info a{
+   line-height: 80px;
+    margin-right:20px;
+}
+#exit{
+    color:#999;
+}
+#containers{
+    min-width: 800px;
+    position: relative;
+}
+#nav{
+    width:200px;
+    background: rgb(249,249,249);
+    height: 800px;
+    font-size:14px;
+}
+#nav dl{
+    color: #666;
+}
+.iconfont{
+    color:#666;
+    margin-right:10px;
+}
+
+.nav{
+    line-height:52px;
+    padding-left:20px;
+    background: #FFF;
+    color: #666;
+    font-size:15px;
+}
+.nav.active .iconfont,
+.nav.active{
+    color:#2ea5ff;
+}
+.subnav{
+    margin-bottom: 5px;
+}
+
+.subnav ul li {
+    list-style-type: none;
+    transition:color 1s;
+    cursor: pointer;
+}
+.subnav ul li a{
+    padding-left:50px;
+    display: block;
+    line-height: 46px;
+    text-decoration: none;
+    color: #666;
+}
+.subnav ul li a:hover,
+.subnav ul li a.active{
+    color:#ff6601;
+}
+#contents{
+    position: absolute;
+    top:0;
+    left:200px;
+    right:0;
+    height: 800px;
+    background: #eee;
+    min-width:800px;
+    padding:20px;
+}
+
+
+/* 表单样式 */
+input,
+textarea,
+select{
+    outline: none;
+}
+select{
+    -webkit-appearance: none;
+    border:1px solid #D4D3D4;
+}
+
+.minput{
+    width:200px;
+    height:36px;
+    border:1px solid #D4D4D4;
+    
+    padding-left: 5px;
+    font-size:12px;
+    border-radius: 2px;
+    margin-right:20px;
+}
+.mtextarea{
+    display: block;
+    width:800px;
+    border:1px solid #D4D4D4;
+    margin-left:80px;
+    position: relative;
+    top:-20px;
+    height:200px;
+    padding:10px;
+    font-family: Consolas, "Microsoft YaHei";
+}
+input:-webkit-autofill{
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+}
+
+
+.w60{
+    width: 50px;
+}
+.w80{
+    width: 80px;
+}
+.w100{
+    width:100px;
+}
+.w150{
+    width: 150px;
+}
+.w200{
+    width: 200px;
+}
+/* 搜索样式 */
+.search_section{
+    margin-bottom: 20px;
+    width:100%;
+    font-size:12px;
+    background-color: #fff;
+    padding:20px;
+}
+
+.search_section .search_item{
+    margin-right: 20px;
+    display: inline-block;
+}
+
+.mbtn{
+    display: inline-block;
+    width:80px;
+    text-align: center;
+    line-height: 36px;
+    background-color: #2ea5ff;
+    color:#fff;
+    border:none;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.obtn{
+    background: #e86565;
+}
+
+/* 表格样式 */
+
+table.table {
+    background-color: #fff;
+    width:100%;
+    border-collapse: collapse;
+}
+table.table_window{
+    margin: 0 auto;
+}
+
+table.table th{
+    font-weight: normal;
+    color: #666;
+    font-size: 15px;
+    height: 50px;
+    text-align: left;
+}
+table.table tr{
+    height: 48px;
+    font-size: 13px;
+    border-bottom: 1px solid #eee;
+    /*transition:background-color 1s;*/
+}
+
+table.table tr th,
+table.table tr td{
+    padding-left: 8px;
+}
+
+table.table tbody tr:hover{
+    background-color: #FAFAFA;
+}
+table tbody tr.child-line{
+    display: none;
+}
+
+.table_window{
+
+}
+.table_window tr{
+    height: 52px;
+}
+.table_window tr td{
+    font-size:14px;
+    min-width: 60px;
+}
+
+
+/*分页信息*/
+#pagination{
+    margin-top:20px;
+    background-color: #fff;
+    padding:10px;
+}
+
+#devtime{
+    position: fixed;
+    border:none;
+    right:10px;
+    top:210px;
+    width:35px;
+    height: 35px;
+    background-color: #000;
+    color:#fff;
+    text-align: center;
+    line-height: 35px;
+    font-size: 12px;
+    border-radius: 35px;
+    z-index : 100;
+}
+
+
+
+/*用户管理页面*/
+
+.code{
+    display: inline-block;
+    border-radius: 4px;
+    padding:2px 3px;
+    color:#000;
+    font-size:13px;
+    line-height: 1;
+    border:1px solid #000;
+}
+
+.code.code_red{
+    border-color: #C40000;
+    color:#C40000;
+}
+
+.code.code_yellow{
+    border-color: #ff6601;
+    color:#ff6601;
+}
+
+.code.code_green{
+    border-color: #69ba4c;
+    color:#69ba4c;
+}
+
+.code.R00{
+    border-color: #999;
+    color:#999;
+}
+.code.R01{
+    border-color: #6098bb;
+    color:#6098bb;
+}
+.code.R02{
+    border-color: #ff6c5c;
+    color:#ff6c5c;
+}
+.code.R03{
+    border-color: #a7db65;
+    color:#a7db65;
+}
+.code.R08{
+    border-color: #69ba4c;
+    color:#69ba4c;
+}
+
+.code.s3{
+    border-color: #3bb449;
+    color:#3bb449;
+}
+
+.code.s-1,.code.s-2,.code.s-3{
+    border-color: #C40000;
+    color:#C40000;
+}
+
+/*系统信息*/
+
+#osinfo{
+    background: #FFFFFF;
+    height: 700px;
+    padding-top:50px;
+}
+
+.item_os{
+    line-height:50px;
+}
+
+.item_os label:nth-of-type(2n+1){
+    color:#999;
+    display: inline-block;
+    width:200px;
+    text-align: center;
+    margin-right:30px;
+}
+
+.item_os label:nth-of-type(2n){
+    color:red;
+}
+
+
+/*大盘*/
+
+#area_user{
+    height:150px;
+    white-space: nowrap;
+}
+.panel_user{
+    width:23%;
+    height:140px;
+    background: #7a8c99;
+    float:left;
+    color: #FFFFFF;
+    padding: 15px 20px;
+}
+.panel_user.R00{
+    background: #7a8c99;
+}
+.panel_user.R01{
+    background: #6098bb;
+    margin-left:2%;
+}
+.panel_user.R02{
+    background: #ff6c5c;
+    margin-left:2%;
+}
+.panel_user.R03{
+    background: #a7db65;
+    margin-left:2%;
+}
+
+.panel_user .panel_title{
+    line-height:50px;
+}
+.panel_user .panel_digit{
+    font-size:32px;
+    font-weight: lighter;
+    text-align: left;
+}
+
+
+#area_daily{
+    height:500px;
+    margin-top:15px;
+    width:100%;
+    background: #fff;
+    padding-top:10px;
+}
+
+#statistic{
+    height:400px;
+    margin-top:30px;
+    width:100%;
+    background: #fff;
+}
+
+#title{
+    text-align: center;
+}
+
+
+.frame{
+    background: #FFF;
+    padding:20px;
+}
+.form_line{
+    margin-bottom:40px;
+}
+.form_line label{
+    display: inline-block;
+    width: 80px;
+    color: #999;
+}
+.form_line .select2{
+    margin-right: 20px;
+}
+#aContent{
+    left:5px;
+}
+
+#contentEditor{
+    width:500px;
+    height:400px;
+    font-size:14px;
+    margin-left:90px;
+    position: relative;
+    top:-20px;
+    border:1px solid #D4D4D4;
+}
+
+#previewArea{
+    width:800px;
+    height:500px;
+}
+.templatePreview{
+    display: block;
+    width:100%;
+    min-height: 300px;
+    border:none;
+    resize: vertical;
+}
+
+.mframe{
+    border: none;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="db_table">
+    <insert id="insert">
+        insert into
+            db_table(name,prefix,db_id,gmt_create)
+        values(
+            {{name | q}},
+            {{prefix | q}},
+            {{db_id | q}},
+            {{now | d}}
+        )
+    </insert>
+    <select id="pageQuery">
+        select
+            t1.*,t2.dbname,t2.host
+        from
+            db_table t1
+        left join
+            db_config t2 on t1.db_id = t2.id
+        where
+            1 = 1
+            {{db_id | and:'db_id'}}
+            {{keyword | and:'t1.name','like'}}
+            {{sort | orderBy}}
+            {{offset | limit:pageSize}}
+    </select>
+    <select id="pageCount">
+        select
+            count(1)
+        from
+            db_table
+        where
+            1 = 1
+            {{db_id | and:'db_id'}}
+            {{keyword | and:'name','like'}}
+    </select>
+
+    <select id="getTableByDb">
+        select
+            id,name text
+        from
+            db_table
+        where
+            {{val | eq:'db_id'}}
+    </select>
+</sql>

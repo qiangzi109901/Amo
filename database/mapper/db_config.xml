@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="db_config">
+    
+    <insert id="insert" before="isUnique">
+        insert into 
+            db_config(name,host,user,passwd,dbname,prefix,port,gmt_create)
+        values(
+            {{name | q}},
+            {{host | q}},
+            {{user | q}},
+            {{passwd | q}},
+            {{dbname | q}},
+            {{prefix | q}},
+            {{port | q}},
+            {{now | d}}
+        )
+    </insert>
+
+    <select id="isUnique">
+        select
+            count(1)
+        from
+            db_config
+        where
+            {{host | eq:'host'}}
+            {{dbname | and:'dbname'}}
+    </select>
+
+    
+    
+    <select id="pageQuery">
+        select
+            *
+        from
+            db_config
+        where
+            1 = 1
+            {{host | and:'host'}}
+            {{keyword | and:'name,dbname','like'}}
+            {{sort | orderBy}}
+            {{offset | limit:pageSize}}
+    </select>
+
+    <select id="pageCount">
+        select
+            count(1)
+        from
+            db_config
+        where
+            1 = 1
+            {{host | and:'host'}}
+            {{keyword | and:'name,dbname','like'}}
+    </select>
+
+    <select id="getHost" more="true">
+        select
+            distinct host as 'id', host as 'text'
+        from
+            db_config
+    </select>
+
+    <select id="getDbByHost" more="true">
+        select
+            id,dbname as 'text'
+        from
+            db_config
+        where
+            {{val | eq:'host'}}
+    </select>
+</sql>

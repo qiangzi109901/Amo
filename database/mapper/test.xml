@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="test">
+    <insert id="add">
+        insert into
+            test(name,password,gender)
+        values(
+            {{name | q}},
+            {{password | q}},
+            {{gender | q}}
+        )
+    </insert>
+</sql>

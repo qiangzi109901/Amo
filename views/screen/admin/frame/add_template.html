@@ -1,0 +1,49 @@
+<div class="frame">
+    <form id="aForm">
+        <div class="form_line">
+            <label>分类</label>
+            <select id="aCatalog1" class="myselect select2" placeholder="文件分类"></select>
+            <select id="aCatalog2" name="catalog_id" class="myselect select2" placeholder="模板分类" noresult="请先选择文件分类"></select>
+        </div>
+
+        <div class="form_line">
+            <label>描述</label>
+            <input type="text" class="minput" name="description"/>
+        </div>
+
+        <div class="form_line">
+            <label>模板语法</label>
+            <select id="aLang" class="myselect select2" placeholder="请选择" name="lang">
+                <option value="">请选择</option>
+                <option value="sql">sql</option>
+                <option value="java">java</option>
+                <option value="javascript">javascript</option>
+                <option value="html">html</option>
+            </select>
+        </div>
+
+        <div class="form_line">
+            <label>内容</label>
+            <div id="contentEditor"></div>
+        </div>
+
+        <div class="form_line">
+            <a class="mbtn" id="btnRender">测试渲染</a>
+            <a class="mbtn w100" id="btnZipRender">压缩渲染</a>
+            <a class="mbtn" id="btnSave">保存</a>
+        </div>
+
+        <div class="form_line">
+            <textarea id="previewArea"></textarea>
+        </div>
+
+    </form>
+
+    <div class="form_line">
+        <a class="mbtn" id="aSubmit">提交</a>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="/js/admin/temp_add.js"></script>

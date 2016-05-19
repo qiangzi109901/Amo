@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="template">
+    <insert id="insert">
+        insert into
+            template(content,catalog_id,description,lang,gmt_create,gmt_update)
+        value(
+            {{content | q}},
+            {{catalog_id | q}},
+            {{description | q}},
+            {{lang | q}},
+            {{now | d}},
+            {{now | d}}
+        )
+    </insert>
+
+    <select id="pageQuery">
+        select
+            t1.*,t2.name,t3.name pname
+        from
+            template t1
+        left join
+            temp_catalog t2 on t1.catalog_id = t2.id
+        left join
+            temp_catalog t3 on t2.pid = t3.id
+        where
+            1 = 1
+            {{lang | and:'t2.lang'}}
+            {{catalog_id | and:'t2.pid'}}
+            {{sort | orderBy}}
+            {{offset | limit:pageSize}}
+    </select>
+
+    <select id="pageCount">
+        select
+            count(1)
+        from
+            template t1
+        left join
+            temp_catalog t2 on t1.catalog_id = t2.id
+        where
+            1 = 1
+            {{lang | and:'t2.lang'}}
+            {{catalog_id | and:'t2.pid'}}
+    </select>
+
+    <delete id="delete">
+        delete from
+            template
+        where
+            {{id | eq:'id'}}
+    </delete>
+
+    <select id="get">
+        select
+            t1.*,t2.pid pid
+        from
+            template t1
+        left join
+            temp_catalog t2 on t1.catalog_id = t2.id
+        where
+            {{id | eq:'t1.id'}}
+    </select>
+
+    <update id="update">
+        update
+            template
+        set
+            {{catalog_id | eq:'catalog_id'}},
+            {{lang | eq:'lang'}},
+            {{description | eq:'description'}},
+            {{now | ed:'gmt_update'}},
+            {{content | eq:'content'}}
+        where
+            {{id | eq:'id'}}
+    </update>
+</sql>

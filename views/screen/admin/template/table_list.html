@@ -1,0 +1,103 @@
+<script id="temp_model_list" type="text/html">
+    [[each models as model]]
+    <tr>
+        <td>[[model.id]]</td>
+        <td>[[model.name]]</td>
+        <td>[[model.dbname]]</td>
+        <td>[[model.host]]</td>
+        <td>[[model.port]]</td>
+        <td>[[model.gmt_create]]</td>
+        <td>
+            <a data-id="[[model.id]]" class="item_delete_info">删除</a>
+        </td>
+    </tr>
+    [[/each]]
+</script>
+
+<!--模态框-->
+<!-- 更新用户信息 -->
+<div class="mywindow" id="aModal">
+    <div class="mywindow_head">
+        <span class="mywindow_title">添加库</span>
+        <span class="mywindow_close_btn">✕</span>
+    </div>
+    <div class="mywindow_body">
+        <form id="aForm">
+            <table class="table_window">
+                <tbody>
+                    <tr>
+                        <td>主机</td>
+                        <td>
+                            <input type="text" class="minput w150" placeholder="127.0.0.1" name="host" id="aHost"/>
+                        </td>
+                        <td>
+                            <input type="text" class="minput w80" placeholder="port:3306" name="port" id="aPort"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>身份</td>
+                        <td>
+                            <input type="text" class="minput w150" name="username" placeholder="username" id="aUsername"/>
+                        </td>
+                        <td>
+                            <input type="text" class="minput w150" name="passwd" placeholder="passwd" id="aPassword"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>库名</td>
+                        <td>
+                            <input type="text" class="minput w150" name="dbname" placeholder="database" id="aDbname"/>
+                        </td>
+                        <td>
+                            <input type="text" class="minput w150" name="name" placeholder="中文名称" id="aName"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>前缀</td>
+                        <td>
+                            <input type="text" class="minput w150" name="prefix" placeholder="prefix" id="mPrefix"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="mywindow_foot">
+        <span class="mywindow_btn mywindow_cancel_btn">取消</span>
+        <span class="mywindow_btn mywindow_sure_btn">测试并连接</span>
+    </div>
+</div>
+
+
+<!-- 重置用户密码 -->
+<div class="mywindow" id="win_update_password">
+    <div class="mywindow_head">
+        <span class="mywindow_title">重置<span id="password_user" style="color:#ff6601"></span>密码</span>
+        <span class="mywindow_close_btn">✕</span>
+    </div>
+    <div class="mywindow_body">
+        <form id="form_update_password">
+            <table class="table_window">
+                <tbody>
+                <tr>
+                    <td>管理员秘钥</td>
+                    <td>
+                        <input type="text" class="minput" name="key" id="key" placeholder="必须输入正确秘钥才能执行该操作"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>新密码</td>
+                    <td>
+                        <input type="text" class="minput" name="name" id="new_password"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="mywindow_foot">
+        <span class="mywindow_btn mywindow_cancel_btn">取消</span>
+
+        <span class="mywindow_btn mywindow_sure_btn">确定</span>
+    </div>
+</div>

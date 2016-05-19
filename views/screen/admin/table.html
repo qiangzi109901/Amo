@@ -1,0 +1,48 @@
+
+<section class="search_section">
+    <div class="search_item">
+        <select  id="sHost" class="myselect select2" name="catalog" placeholder="请选择主机">
+            <option></option>
+            <option value="all">所有主机</option>
+        </select>
+    </div>
+
+    <div class="search_item">
+        <select  id="sDb" class="myselect select2" name="catalog" placeholder="请选择数据库" noresult="请先选择主机">
+            <option></option>
+        </select>
+    </div>
+
+    <input type="text" class="minput" name="name" id="keyword" placeholder="检索"/>
+    <span id="sSubmit" class="mbtn">搜索</span>
+    <span id="aBtn" class="mbtn obtn" style="float:right">添加表</span>
+</section>
+
+
+<table border="0" id="table_list" class="table">
+    <thead>
+    <th>编号</th>
+    <th>表名</th>
+    <th>主机</th>
+    <th>数据库</th>
+    <th>添加时间</th>
+    <th>操作</th>
+    </thead>
+
+    <tbody id="lists">
+
+    </tbody>
+</table>
+
+<div id="pagination">
+    <div class="mypage" id="mypage"></div>
+</div>
+
+
+
+</div>
+</div>
+
+{{include './template/table_list'}}
+
+<script type="text/javascript" src="/js/admin/table.js"></script>

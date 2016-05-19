@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="db_field">
+
+    <insert id="insert">
+        insert into
+            db_field(column_name,column_type,column_type_value,name,type,set_method,get_method,length,is_auto,is_null,ordinal,comment,table_id,gmt_create)
+        values(
+            {{column_name | q}},
+            {{column_type | q}},
+            {{column_type_value | q}},
+            {{name | q}},
+            {{type | q}},
+            {{set_method | q}},
+            {{get_method | q}},
+            {{length | q}},
+            {{is_auto | q}},
+            {{is_null | q}},
+            {{ordinal | q}},
+            {{comment | q}},
+            {{table_id | q}},
+            {{now | d}}
+        )
+    </insert>
+    <select id="pageQuery">
+        select
+            *
+        from
+            view_field
+        where
+            1 = 1
+            {{table_id | and:'table_id'}}
+            {{host | and:'host'}}
+            {{db_id | and:'db_id'}}
+            {{sort | orderBy}}
+            {{offset | limit:pageSize}}
+    </select>
+
+    <select id="pageCount">
+        select
+            count(1)
+        from
+            view_field
+        where
+            1 = 1
+            {{table_id | and:'table_id'}}
+            {{host | and:'host'}}
+            {{db_id | and:'db_id'}}
+    </select>
+</sql>

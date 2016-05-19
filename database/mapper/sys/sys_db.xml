@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="sys_db">
+    <select id="all">
+        select
+            *
+        from
+            information_schema.COLUMNS
+        where
+            {{dbname | eq:'TABLE_SCHEMA'}}
+    </select>
+</sql>

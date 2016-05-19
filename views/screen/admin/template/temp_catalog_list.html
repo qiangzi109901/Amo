@@ -1,0 +1,95 @@
+<script id="temp_model_list" type="text/html">
+    [[each models as model index]]
+    <tr>
+        <td>[[index]]</td>
+        <td>[[model.name]]</td>
+        <td>[[model.pname]]</td>
+        <td>[[model.lang]]</td>
+        <td>
+            <a data-id="[[model.id]]" class="item_update">更新</a>
+            <a data-id="[[model.id]]" class="item_delete">删除</a>
+        </td>
+    </tr>
+    [[/each]]
+</script>
+
+<!--模态框-->
+<!-- 更新用户信息 -->
+<div class="mywindow" id="uModal">
+    <div class="mywindow_head">
+        <span class="mywindow_title">更新分类</span>
+        <span class="mywindow_close_btn">✕</span>
+    </div>
+    <div class="mywindow_body">
+        <form id="uForm">
+            <table class="table_window">
+                <tbody>
+                    <tr>
+                        <td>名称</td>
+                        <td>
+                            <input type="text" class="minput w200" placeholder="" name="name" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>分类</td>
+                        <td>
+                            <select  id="uPid" class="myselect select2" name="pid" placeholder="请选择分类" default_msg="一级分类" default_val="0"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>语言</td>
+                        <td>
+                            <input type="text" class="minput w200" name="lang" placeholder="language" />
+                        </td>
+                    </tr>
+                    <input type="hidden" name="id" />
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="mywindow_foot">
+        <span class="mywindow_btn mywindow_cancel_btn">取消</span>
+        <span class="mywindow_btn mywindow_sure_btn">确认</span>
+    </div>
+</div>
+
+
+<!--模态框-->
+<!-- 更新用户信息 -->
+<div class="mywindow" id="aModal">
+    <div class="mywindow_head">
+        <span class="mywindow_title">添加分类</span>
+        <span class="mywindow_close_btn">✕</span>
+    </div>
+    <div class="mywindow_body">
+        <form id="aForm">
+            <table class="table_window">
+                <tbody>
+                <tr>
+                    <td>名称</td>
+                    <td>
+                        <input type="text" class="minput w200" placeholder="" name="name" id="aHost"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>分类</td>
+                    <td>
+                        <select  id="aPid" class="myselect select2" name="pid" placeholder="请选择分类" default_msg="一级分类" default_val="0"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>语言</td>
+                    <td>
+                        <input type="text" class="minput w200" name="lang" placeholder="language" id="aUsername"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="mywindow_foot">
+        <span class="mywindow_btn mywindow_cancel_btn">取消</span>
+        <span class="mywindow_btn mywindow_sure_btn">确认</span>
+    </div>
+</div>
+
