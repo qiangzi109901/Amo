@@ -1,17 +1,18 @@
 require(['dialog','frame','message']);
 
-define('TempCatalog',['admin/common','jquery','mselect2','pager'],function(common,$,mselect2){
+define('TempCatalog',['admin/common','jquery','mselect2','util','pager'],function(common,$,mselect2,util){
 
     var searchParam = {
         page : 1,
         pageSize : 10,
-        sort : 'pid asc,ordinal asc'
+        sort : 't1.pid asc,t1.ordinal asc'
     }
 
     var config = {
         model : 'temp_catalog',
         insertUrl : '/data/temp_catalog/insert',
-        updateUrl : '/data/temp_catalog/update'
+        updateUrl : '/data/temp_catalog/update',
+        moveUrl : '/data/ordinal/move'
     }
 
 
@@ -35,14 +36,7 @@ define('TempCatalog',['admin/common','jquery','mselect2','pager'],function(commo
             mselect2.ajaxRenderData('getFirstTempCatalogs', '#aPid,#uPid');
         },
         search : function(page){
-            searchParam.lang = mselect2.value('#sLang');
-            searchParam.keyword = $("#keyword").val();
-            if(typeof page == 'number'){
-                searchParam.page = page;
-            }
-            else{
-                searchParam.page = 1
-            }
+            common.generateSearch(searchParam, page);
             common.searchPage(TempCatalog,config.model,searchParam,true,function(){
                 common.bindU(config.model,function(id){
                     common.renderU(TempCatalog, id)
@@ -50,6 +44,7 @@ define('TempCatalog',['admin/common','jquery','mselect2','pager'],function(commo
                     TempCatalog.search();
                 });
                 common.bindD(config.model,TempCatalog.search);
+                TempCatalog.bindMoveEvent();
             });
         },
         /*******事件绑定区********/
@@ -62,15 +57,24 @@ define('TempCatalog',['admin/common','jquery','mselect2','pager'],function(commo
                 TempCatalog.search();
             });
         },
-        /**   获取数据 **/
-        getById : function(id){
-            for(var i in TempCatalog.pageData){
-                var item = TempCatalog.pageData[i];
-                if(item.id == id){
-                    return item;
-                }
-            }
-            return null;
+        bindMoveEvent : function(){
+            $(".item_move").each(function(){
+                $(this).unbind("click");
+                $(this).click(function(){
+                    util.post(config.moveUrl, {
+                        'model' : 'temp_catalog',
+                        'sort_field' : 'ordinal',
+                        'id' : $(this).data('id'),
+                        'move_type' : $(this).data('type'),
+                        'pid' : 1,
+                        'pid_field' : 'pid'
+                    },function(e){
+                        console.log(e);
+                        TempCatalog.search();
+                    })
+                });
+            });
+
         }
     }
     return TempCatalog;

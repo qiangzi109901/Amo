@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="ordinal">
+    <select id="move">
+        call pro_ordinal(
+			{{model | q}},{{sort_field | q}},{{id | q}},{{move_type | q}},{{pid | q}},{{pid_field | q}}
+        )
+    </select>
+</sql>

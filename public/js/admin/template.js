@@ -1,10 +1,11 @@
 require(['dialog','frame','message','prism']);
 
-define('Template',['admin/common','jquery','mselect2','pager'],function(common,$,mselect2){
+define('Template',['admin/common','jquery','mselect2','dbtemplate','pager'],function(common,$,mselect2,dbtemplate){
 
     var searchParam = {
         page : 1,
-        pageSize : 10
+        pageSize : 10,
+        sort : 't2.pid asc,t2.ordinal asc'
     }
 
     var config = {
@@ -33,13 +34,7 @@ define('Template',['admin/common','jquery','mselect2','pager'],function(common,$
             mselect2.ajaxRenderData('getFirstTempCatalogs', '#aPid');
         },
         search : function(page){
-            if(typeof page == 'number'){
-                searchParam.page = page;
-            }
-            else{
-                searchParam.page = 1
-            }
-            common.generateSearch(searchParam);
+            common.generateSearch(searchParam, page);
             common.searchPage(Template,config.model,searchParam,true,function(){
                 // $(".templatePreview").addClass("prettyprint linenums");
                 // prettyPrint();
@@ -76,12 +71,17 @@ define('Template',['admin/common','jquery','mselect2','pager'],function(common,$
                 $(this).unbind('click')
                 $(this).click(function(){
                     var state = $(this).data('state') || 0;
+                    var target = $(this).next('.child-line');
                     if(state == 0){
                         //打开
-                        $(this).next('.child-line').slideDown(200);
+                        target.slideDown(200);
+                        var temp = target.find("code:eq(0)").text();
+                        var tarms = dbtemplate.compileWithDemo(temp);
+                        target.find("code:eq(1)").text(tarms);
+                        Prism.highlightAll();
                     }
                     else{
-                        $(this).next('.child-line').slideUp(200);
+                        target.slideUp(200);
                     }
                     $(this).data('state',state ? 0 : 1);
                 });

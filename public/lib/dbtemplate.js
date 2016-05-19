@@ -1,4 +1,4 @@
-define(['template'], function (template) {
+define(['template','data/demo'], function (template,demoData) {
 
     template.helper('dateFormat', function (val, pattern) {
         if (val == null || val == '') {
@@ -19,6 +19,25 @@ define(['template'], function (template) {
                 return val;
         }
     });
+
+
+    template.config('openTag', '[[');
+    template.config('closeTag', ']]');
+    template.config('escape',false);
+
+    function maketemplate(fn) {
+        return fn.toString().split('\n').slice(1,-1).join('\n') + '\n'
+    }
+
+
+    var node_where_date = maketemplate(function(){/*
+{{[[column.column_name]]_start | and:'t1.[[column.column_name]]','gte'}}
+            {{[[column.column_name]]_end | and:'t1.[[column.column_name]]','lte'}}
+     */});
+    
+    var node_where_string = maketemplate(function(){/*
+{{[[column.column_name]] | and:'t1.[[column.column_name]]'}}
+     */});
 
     //索引
     template.helper('ms', function (val, data, index) {
@@ -78,16 +97,30 @@ define(['template'], function (template) {
             case "Long":
                 return "{{" +col+ " | eq:'" + col + "'}}" + dou;
         }
+    });
 
+
+    template.helper('nand', function(column, data, index){
+        var col = column.column_name;
+        if(col == 'id'){
+            return ''
+        }
+        switch (column.type){
+            case 'Date':
+                console.log(node_where_date)
+                return template.compile(node_where_date)({'column':column})
+            case 'String':
+            case "Integer":
+            case "Long":
+                console.log(node_where_string)
+                return template.compile(node_where_string)({'column':column})
+        }
     });
 
 
 
 
-
-    template.config('openTag', '[[');
-    template.config('closeTag', ']]');
-    template.config('escape',false);
+   
 
     return {
         compile: function (source, data) {
@@ -98,6 +131,9 @@ define(['template'], function (template) {
             var html = template.compile(source)(data);
             template.config('compress',false);
             return html;
+        },
+        compileWithDemo : function(source){
+            return template.compile(source)(demoData);
         }
     }
 

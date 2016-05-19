@@ -1,7 +1,13 @@
 //admin通用处理
 define(['jquery', 'util', 'mtemplate', 'mselect2','dialog','message','frame'], function($, util, mtemplate,mselect2){
     return {
-        generateSearch : function(searchParam){
+        generateSearch : function(searchParam, page){
+            if(typeof page == 'number'){
+                searchParam.page = page;
+            }
+            else{
+                searchParam.page = 1
+            }
             var targets = $(".search_section").find("[name]");
             var len = targets.length;
             for(var i=0;i<len;i++){
