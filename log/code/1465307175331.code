@@ -1,0 +1,15 @@
+
+define('Tag',['jquery','mtemplate','util'],function($,mtemplate,util){
+    var Tag = {
+        config : {
+            url : {
+            }
+        },
+        init : function(){
+        }
+    };
+    return Tag;
+});
+require(['Tag'], function(Tag){
+    Tag.init();
+});

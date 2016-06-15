@@ -14,27 +14,4 @@
 
     
 
-    <select id="pageQuery">
-        select
-            t1.*
-        from
-            user t1
-        where
-            1 = 1
-            
-            
-            {{name | and:'t1.name'}}
-
-            {{age | and:'t1.age'}}
-
-            {{group_id | and:'t1.group_id'}}
-
-            {{role_id | and:'t1.role_id'}}
-
-            {{birthday_start | and:'t1.birthday','gte'}}
-            {{birthday_end | and:'t1.birthday','lte'}}
-
-            {{sort | orderBy}}
-            {{offset | limit:pageSize}}
-    </select>
 </sql>

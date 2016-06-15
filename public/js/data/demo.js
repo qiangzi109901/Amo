@@ -2,6 +2,7 @@ define(function(){
     return {
         table : 'user',
         className : 'User',
+
         columns : [{
             column_name : 'id',
             column_type : 'int',
@@ -56,7 +57,23 @@ define(function(){
             get_method : 'getBirthday',
             is_auto : false,
             is_null : 'False'
-        }]
+        }],
+          beanName: 'UserDO',
+          beanObject: 'userDO',
+          daoName: 'UserDao',
+          daoObject: 'userDao',
+          serviceName: 'UserService',
+          serviceObject: 'userService',
+          serviceImplName: 'UserServiceImpl',
+          daoTestName: 'TestUserDao',
+          serviceTestName: 'TestUserService',
+          mapperName: 'UserDOMapper.xml',
+          packageBean: 'cn.frs.fortum.model',
+          packageDao: 'cn.frs.fortum.dao',
+          packageService: 'cn.frs.fortum.service',
+          packageServiceImpl: 'cn.frs.fortum.service.impl',
+          packageDaoTest: 'cn.frs.fortum.test.dao',
+          packageDaoService: 'cn.demo.xx.test.service'
     }
 
 });

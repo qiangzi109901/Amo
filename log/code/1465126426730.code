@@ -1,0 +1,91 @@
+
+<div id="page_list">
+    <section class="search_section">
+        <div class="search_item">
+            <select  id="splatform_id" class="myselect select2" name="platform_id" placeholder="请选择平台"></select>
+        </div>
+        <input type="text" class="minput" name="name" id="keyword" placeholder="检索"/>
+        <span id="sSubmit" class="mbtn">搜索</span>
+        <span class="mbtn obtn" style="float:right" id="aBtn">添加</span>
+    </section>
+    <table border="0" id="table_list" class="table">
+        <thead>
+            <th>id</th>
+            <th>username</th>
+            <th>password</th>
+            <th>nickname</th>
+            <th>position</th>
+            <th>email</th>
+            <th>gmt_create</th>
+            <th>ip</th>
+            <th>status</th>
+        <th>操作</th>
+        </thead>
+        <tbody id="lists">
+        </tbody>
+    </table>
+    <div id="pagination">
+        <div class="mypage" id="mypage"></div>
+    </div>
+</div>
+<div id="page_add">
+    <a id="bClose" class="mbtn">×</a>
+    <form id="aForm">
+        <input type="hidden" name="id" />
+        <div class="form_line">
+            <label>username</label>
+            <input type="text" class="minput" name="username"/>
+        </div>
+        <div class="form_line">
+            <label>password</label>
+            <input type="text" class="minput" name="password"/>
+        </div>
+        <div class="form_line">
+            <label>nickname</label>
+            <input type="text" class="minput" name="nickname"/>
+        </div>
+        <div class="form_line">
+            <label>position</label>
+            <input type="text" class="minput" name="position"/>
+        </div>
+        <div class="form_line">
+            <label>email</label>
+            <input type="text" class="minput" name="email"/>
+        </div>
+        <div class="form_line">
+            <label>gmt_create</label>
+            <input type="text" class="minput" name="gmt_create"/>
+        </div>
+        <div class="form_line">
+            <label>ip</label>
+            <input type="text" class="minput" name="ip"/>
+        </div>
+        <div class="form_line">
+            <label>status</label>
+            <input type="text" class="minput" name="status"/>
+        </div>
+    </form>
+    <div class="form_line">
+        <a class="mbtn" id="aSubmit">提交</a>
+    </div>
+</div>
+<script id="temp_model_list" type="text/html">
+    [[each models as model]]
+    <tr>
+            <td>[[model.id]]</td>
+            <td>[[model.username]]</td>
+            <td>[[model.password]]</td>
+            <td>[[model.nickname]]</td>
+            <td>[[model.position]]</td>
+            <td>[[model.email]]</td>
+            <td>[[model.gmt_create]]</td>
+            <td>[[model.ip]]</td>
+            <td>[[model.status]]</td>
+        <td>
+            <a data-id="[[model.id]]" class="item_update smobtn">更新</a>
+            <a data-id="[[model.id]]" class="item_delete smobtn">删除</a>
+        </td>
+    </tr>
+    [[/each]]
+</script>
+<script type="text/javascript" src="/js/admin/user.js"></script>

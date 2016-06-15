@@ -31,6 +31,8 @@ define('Template',['jquery','util','casecade','editor','mselect2','data/demo','d
             mselect2.renderAndBind("#aTheme", function(val){
                 editor.setTheme(val);
             });
+
+            mselect2.render('#aCompress');
         },
         bindAddEvent: function () {
             $("#aSubmit").click(function(){

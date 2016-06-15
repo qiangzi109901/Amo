@@ -8,4 +8,14 @@
         where
             {{dbname | eq:'TABLE_SCHEMA'}}
     </select>
+
+    <select id="allFields">
+        select
+            *
+        from
+            information_schema.COLUMNS
+        where
+            {{dbname | eq:'TABLE_SCHEMA'}}
+            {{tbname | and:'TABLE_NAME'}}
+    </select>
 </sql>

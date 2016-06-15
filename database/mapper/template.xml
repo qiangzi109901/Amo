@@ -73,4 +73,28 @@
         where
             {{id | eq:'id'}}
     </update>
+
+    <select id="getByCatalogId">
+        select
+            *
+        from
+            template
+        where
+            {{catalog_id | eq:'catalog_id'}}
+    </select>
+
+    <select id="listByCatalog">
+        select
+            t1.* 
+        from
+            template t1
+        left join
+            temp_catalog t2
+        on
+            t1.catalog_id = t2.id
+        where
+            {{val | eq:'t2.pid'}}
+        order by
+            t2.ordinal asc
+    </select>
 </sql>

@@ -8,13 +8,13 @@ define(["jquery","ace/ace"],function($,ace){
             editor.insert('\n    ')
             editor.getSession().setTabSize(4);
             editor.getSession().setMode('ace/mode/sql');
-            editor.getSession().setUseSoftTabs(true);
-            editor.session.setOption("useWorker", false);
+            // editor.getSession().setUseSoftTabs(true);
+            // editor.session.setOption("useWorker", false);
             // editor.setOption("enableEmmet",true);
             // this.setMode("behaviour");
             // this.setReadOnly(true);
             // editor.setOption("vScrollBarAlwaysVisible",true);
-            editor.setOption("scrollPastEnd",false);
+            // editor.setOption("scrollPastEnd",false);
             editor.setOption("showGutter",false);
             // editor.getSession().setUseWrapMode(true);
             editor.setShowPrintMargin(false);
@@ -34,6 +34,7 @@ define(["jquery","ace/ace"],function($,ace){
             return editor.getValue();
         },
         setValue : function(content){
+            console.log(content)
             editor.setValue(content);
         },
         clear : function(){

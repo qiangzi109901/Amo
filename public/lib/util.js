@@ -5,13 +5,14 @@ define(['jquery','message'],function($){
 				url : param.url,
 				type : param.type,
 				data : param.data,
+				async : param.async == false ? false : true,
 				dataType : 'json',
 				success : function(e){
 					if(!e.success){
 						$.error(e.message);
 						return;
 					}
-					if(e.data){
+					if('data' in e){
 						return param.cb && param.cb(e.data);
 					}
 					param.cb && param.cb(e);
@@ -32,6 +33,19 @@ define(['jquery','message'],function($){
 				data : data,
 				cb : cb
 			});
+		},
+		postAndGet : function(url, data){
+			var result = null;
+			this.jax({
+				url : url,
+				type : 'post',
+				data : data,
+				async : false,
+				cb : function(e){
+					result = e;
+				}
+			});
+			return result;
 		},
 		formdata : function(form){
 			return $(form).serialize();
@@ -56,6 +70,18 @@ define(['jquery','message'],function($){
 				}
 			}
 			return result;
+		},
+		assignForm : function(form, data, except){
+			var targets = $(form).find('[name]');
+			var len = targets.length;
+			except = except || [];
+			for(var i=0;i<len;i++){
+				var item = targets.eq(i);
+				var name = item.attr('name');
+				if(except.indexOf(name) < 0 && data[name]){
+					item.val(data[name]);
+				}
+			}
 		}
 	}
 })

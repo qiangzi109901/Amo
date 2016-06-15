@@ -10,6 +10,16 @@
             {{now | d}}
         )
     </insert>
+    <select id="get">
+        select
+            t1.*,t2.prefix
+        from
+            db_table t1
+        left join
+            db_config t2 on t1.db_id = t2.id
+        where
+            {{id | eq:'t1.id'}}
+    </select>
     <select id="pageQuery">
         select
             t1.*,t2.dbname,t2.host
@@ -35,12 +45,32 @@
             {{keyword | and:'name','like'}}
     </select>
 
-    <select id="getTableByDb">
+    <select id="getTableByDb" more="true">
         select
             id,name text
         from
             db_table
         where
             {{val | eq:'db_id'}}
+    </select>
+
+    <delete id="deleteByDb">
+        delete from
+            db_table
+        where
+            {{db_id | eq:'db_id'}}
+    </delete>
+
+    <select id="queryTableAndFieldsByDb" more="true" child="column_id,column_name,column_type,column_type_value,name,type,set_method,get_method,length,is_auto,is_null,ordinal,comment" childId="column_id" childName="columns" key="tableId" >
+        select
+            t1.id tableId,t1.name `table`,t2.id column_id,t2.column_name,t2.column_type,t2.column_type_value,t2.name,t2.type,t2.set_method,t2.get_method,t2.length,t2.is_auto,t2.is_null,t2.ordinal,t2.comment
+        from
+            db_table t1
+        left join 
+            db_field t2 on t1.id = t2.table_id
+        where
+            t1.db_id = {{dbId}}
+        order by
+            t1.id asc,t2.id asc
     </select>
 </sql>

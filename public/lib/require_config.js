@@ -18,11 +18,19 @@ require.config({
         'mtemplate' : '../lib/mtemplate',
         'dbtemplate' : '../lib/dbtemplate',
         'mselect2' : '../lib/mselect2',
+        'radio' : '../lib/radio',
         'echarts' : '../lib/echarts.min',
         'casecade' : '../lib/select2/casecade',
         'ace' : '../lib/ace',
         'editor' : '../lib/editor',
-        'prism' : '../lib/prism/prism'
+        'prism' : '../lib/prism/prism',
+        'clip' : '../lib/clipboard.min',
+        'mclip' : '../lib/mclip',
+        'common' : '../lib/common',
+        'toputil' : '../lib/toputil',
+        'tether' : '../lib/tether/main/js/tether.min',
+        'tether-drop' : '../lib/tether/drop/js/drop.min',
+        'tether-tooltip' : '../lib/tether/tooltip/js/tooltip.min'
     },
     shim : {
     	'message' : {

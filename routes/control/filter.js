@@ -6,6 +6,16 @@ var print = require('mprint');
 var template = require('art-template');
 var fs = require('fs');
 var querystring = require('querystring');
+exports.logFilter = function(req,res,next){
+    print.info('请求连接:' + req.originalUrl);
+    print.info('请求query参数:');
+    print.error(req.query);
+    print.info('请求body参数:');
+    print.error(req.body);
+
+    next();
+}
+
 exports.filterAdmin = function(req,res,next){
 
     var url = req.originalUrl;
@@ -44,7 +54,6 @@ exports.filterLogin = function(req,res,next){
 }
 
 
-
 //页面中间件
 exports.renderFilter = function(req,res,next){
     print.warn('请求链接:' + req.originalUrl);
@@ -78,6 +87,8 @@ exports.renderFilter = function(req,res,next){
             page = page.slice(0,index);
         }
         var checkfile = basedir + '/' + layout + '/' + page;
+        print.ps(layout)
+        print.ps(checkfile)
         var file =  checkfile + ".html";
         fs.stat(file,function(err){
             if(err){

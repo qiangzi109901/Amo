@@ -4,7 +4,7 @@ define('Template',['admin/common','jquery','mselect2','dbtemplate','pager'],func
 
     var searchParam = {
         page : 1,
-        pageSize : 10,
+        pageSize : 50,
         sort : 't2.pid asc,t2.ordinal asc'
     }
 
@@ -75,9 +75,12 @@ define('Template',['admin/common','jquery','mselect2','dbtemplate','pager'],func
                     if(state == 0){
                         //打开
                         target.slideDown(200);
-                        var temp = target.find("code:eq(0)").text();
-                        var tarms = dbtemplate.compileWithDemo(temp);
-                        target.find("code:eq(1)").text(tarms);
+                        var temp = target.find(".mcode").val();
+                        console.log(temp);
+                        var escapeTemp = dbtemplate.htmlEscape(temp);
+                        target.find("code:eq(0)").html(dbtemplate.makeNewLine(escapeTemp));
+                        var tarms = dbtemplate.compileWithDemo(escapeTemp);
+                        target.find("code:eq(1)").html(dbtemplate.makeNewLine(tarms));
                         Prism.highlightAll();
                     }
                     else{

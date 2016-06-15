@@ -1,7 +1,7 @@
 <script id="temp_model_list" type="text/html">
     [[each models as model index]]
     <tr class="parent-line">
-        <td>[[index]]</td>
+        <td>[[model.id]]</td>
         <td>[[model.name]]</td>
         <td>[[model.pname]]</td>
         <td>[[model.gmt_create]]</td>
@@ -13,7 +13,8 @@
     </tr>
     <tr class="child-line">
         <td colspan="6">
-            <pre><code class="language-[[model.lang]]">[[model.content]]</code></pre>
+            <textarea class="mcode">[[#model.content]]</textarea>
+            <pre><code class="language-[[model.lang]]"></code></pre>
             <p>编译后:</p>
             <pre><code class="language-[[model.lang]]"></code></pre>
         </td>

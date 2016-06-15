@@ -39,6 +39,27 @@ define(['template','data/demo'], function (template,demoData) {
 {{[[column.column_name]] | and:'t1.[[column.column_name]]'}}
      */});
 
+    var java_set_string = maketemplate(function(){/*
+<if test="[[column.name]] != null and [[column.name]] != ''">
+                [[column.column_name]] = #{[[column.name]]},
+            </if>
+    */})
+     var java_set_digit = maketemplate(function(){/*
+<if test="[[column.name]] != null">
+                [[column.column_name]] = #{[[column.name]]},
+            </if>
+    */})
+    var java_where_string = maketemplate(function(){/*
+<if test="[[column.name]] != null and [[column.name]] != ''">
+            and [[column.column_name]] = #{[[column.name]]}
+        </if>
+    */})
+     var java_where_digit = maketemplate(function(){/*
+<if test="[[column.name]] != null">
+            and [[column.column_name]] = #{[[column.name]]}
+        </if>
+    */})
+
     //索引
     template.helper('ms', function (val, data, index) {
         if (index < data.length - 1) {
@@ -83,6 +104,35 @@ define(['template','data/demo'], function (template,demoData) {
         }
     });
 
+
+    template.helper('jcol', function (column, data, index) {
+        var prop = column.name;
+        if (prop == 'id') {
+            return '';
+        }
+        var dou = index < data.length - 1 ? ',' : '';
+        return "#{" + prop + "}" + dou;
+    });
+
+
+    template.helper('jval', function (column) {
+        switch(column.type){
+            case 'Date' : 
+                return 'new Date()';
+            case 'Integer':
+                return Math.floor(Math.random() * 100);
+            case 'String':
+                var as = 'abcdefghijklmnopqrstuvwxyz';
+                var i = 0;
+                var sk = [];
+                while(i<8){
+                    sk.push(as.charAt(Math.floor(Math.random() * as.length)));
+                    i ++;
+                }
+                return '"' + sk.join("") + '"';
+        }
+    });
+
     template.helper('neq', function(column, data, index){
         var col = column.column_name;
         if(col == 'id'){
@@ -99,6 +149,15 @@ define(['template','data/demo'], function (template,demoData) {
         }
     });
 
+    template.helper('comma', function(items, index, tag){
+        tag = tag || ",";
+        return items.length - 1 > index ? tag : '';
+    });
+
+
+    function return_template(source, column){
+        return template.compile(source)({'column':column})
+    }
 
     template.helper('nand', function(column, data, index){
         var col = column.column_name;
@@ -107,20 +166,67 @@ define(['template','data/demo'], function (template,demoData) {
         }
         switch (column.type){
             case 'Date':
-                console.log(node_where_date)
-                return template.compile(node_where_date)({'column':column})
+                return return_template(node_where_date, column)
             case 'String':
             case "Integer":
             case "Long":
-                console.log(node_where_string)
-                return template.compile(node_where_string)({'column':column})
+                return return_template(node_where_string, column)
         }
     });
 
+    template.helper('jset', function(column){
+        if(column.name == 'id'){
+            return '';
+        }
+        switch(column.type){
+            case 'String':
+                return return_template(java_set_string, column);
+            default:
+                return return_template(java_set_digit, column);
+        }
+    });
+
+    template.helper('jset', function(column){
+        if(column.name == 'id'){
+            return '';
+        }
+        switch(column.type){
+            case 'String':
+                return return_template(java_set_string, column)
+            default:
+                return return_template(java_set_digit, column)
+        }
+    });
+
+    template.helper('jwhere', function(column){
+        if(column.name == 'id'){
+            return '';
+        }
+        switch(column.type){
+            case 'String':
+                return return_template(java_where_string, column)
+            case 'Date':
+                return ''
+            default:
+                return return_template(java_where_digit, column)
+        }
+    });
+
+    template.helper('sid', function(){
+        var rst = "" + Math.floor(Math.random() * 7 + 1);
+        for(var i = 1;i<19;i ++){
+            rst += Math.floor(Math.random() * 10);
+        }
+        return rst;
+    });
 
 
-
-   
+    function htmlEscape(str) {
+        return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+    }
 
     return {
         compile: function (source, data) {
@@ -132,8 +238,25 @@ define(['template','data/demo'], function (template,demoData) {
             template.config('compress',false);
             return html;
         },
+        htmlEscape : function(source){
+            return htmlEscape(source);
+        },
         compileWithDemo : function(source){
-            return template.compile(source)(demoData);
+            template.config('escape',true);
+            var result = template.compile(source)(demoData);
+            return this.removeBlankLine(result);
+        },
+        render : function(id,data){
+            return template(id,data);
+        },
+        makeNewLine : function(source){
+            return source.replace(/-b-/g,'');
+        },
+        removeBlankLine : function(source){
+            return source.replace(/\n\s*\n/g,'\n')
+                        .replace(/\[\{/g,'[[')
+                        .replace(/\}\]/g,']]')
+                        .replace(/-b-/g, '');
         }
     }
 

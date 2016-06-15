@@ -141,7 +141,7 @@ define(['jquery', 'util', 'mtemplate', 'mselect2','dialog','message','frame'], f
                 $("#table_list").hide();
                 return;
             }
-            var html =  mtemplate.T("temp_model_list",{"models":data});
+            var html =  mtemplate.render("temp_model_list",{"models":data});
             $("#lists").html(html);
             cb && cb();
             $("#table_list").show();

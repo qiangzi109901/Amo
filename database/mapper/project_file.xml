@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="project_file">
+    <insert id="insert">
+        insert into
+            project_file(
+                name,
+                catalog,
+                ordinal,
+                content,
+                gmt_create,
+                gmt_update,
+                project_id,
+                lang
+            )
+        value(
+            {{name | q}},
+            {{catalog | q}},
+            {{ordinal | q}},
+            {{content | q}},
+            {{now | d}},
+            {{now | d}},
+            {{project_id | q}},
+            {{lang | q}}
+        )
+        on duplicate key
+        update
+            {{content | eq:'content'}}
+
+    </insert>
+
+    <select id="isUnique">
+        select
+            count(1)
+        from
+            project_file
+        where
+            {{name | eq:'name'}}
+            {{catalog | and:'catalog'}}
+            {{project_id | and:'project_id'}}
+            {{id | and:'id','!='}}
+    </select>
+
+    <update id="update">
+        update
+            project_file
+        set
+            {{name | eq:'name'}},
+            {{catalog | eq:'catalog'}},
+            {{ordinal | eq:'ordinal'}},
+            {{content | eq:'content'}},
+            {{now | ed:'gmt_create'}},
+            {{now | ed:'gmt_update'}},
+            {{project_id | eq:'project_id'}}
+        where
+            {{id | eq:'id'}}
+    </update>
+
+    <select id="checkDelete">
+        select 
+            count(1)
+        from    
+            project_file
+        where
+            1 = 0
+    </select>
+
+    <delete id="delete" before="checkDelete">
+        delete from
+            project_file
+        where
+            {{id | eq:'id'}}
+    </delete>
+
+    <select id="pageQuery">
+        select
+            t1.*
+        from
+            project_file t1
+        where
+            1 = 1
+            {{name | and:'t1.name'}}
+            {{catalog | and:'t1.catalog'}}
+            {{ordinal | and:'t1.ordinal'}}
+            {{content | and:'t1.content'}}
+            {{gmt_create_start | and:'t1.gmt_create','gte'}}
+            {{gmt_create_end | and:'t1.gmt_create','lte'}}
+            {{gmt_update_start | and:'t1.gmt_update','gte'}}
+            {{gmt_update_end | and:'t1.gmt_update','lte'}}
+            {{project_id | and:'t1.project_id'}}
+            {{sort | orderBy}}
+            {{offset | limit:pageSize}}
+    </select>
+
+    <select id="pageCount">
+        select
+            count(1)
+        from
+            project_file t1
+        where
+            1 = 1
+            {{name | and:'t1.name'}}
+            {{catalog | and:'t1.catalog'}}
+            {{ordinal | and:'t1.ordinal'}}
+            {{content | and:'t1.content'}}
+            {{gmt_create_start | and:'t1.gmt_create','gte'}}
+            {{gmt_create_end | and:'t1.gmt_create','lte'}}
+            {{gmt_update_start | and:'t1.gmt_update','gte'}}
+            {{gmt_update_end | and:'t1.gmt_update','lte'}}
+            {{project_id | and:'t1.project_id'}}
+    </select>
+
+    
+    <select id="listAll">
+        select
+            *
+        from
+            project_file
+    </select>
+
+
+    <select id="listByProject" more="true" child="id,name,content,project_id,gmt_create,gmt_update" childId="catalog" childName="files" key="catalog">
+        select
+            *
+        from
+            project_file
+        where
+            {{projectId | eq:'project_id'}}
+        order by
+            ordinal asc,id asc
+    </select>
+
+    
+    <select id="get">
+        select
+            *
+        from
+            project_file
+        where
+            {{id | eq:'id'}}
+    </select>
+
+    <delete id="deleteByProject">
+        delete from
+            project_file
+        where
+            project_id = {{id | q}}
+    </delete>
+    
+
+</sql>

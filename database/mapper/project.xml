@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="project">
+    <insert id="insert" before="isUnique">
+        insert into project
+        (
+            name,
+            db_id,
+            type,
+            package_bean,
+            package_dao,
+            package_service,
+            package_service_impl,
+            package_dao_test,
+            package_service_test,
+            name_bean,
+            name_dao,
+            name_service,
+            name_service_impl,
+            name_mapper,
+            gmt_create
+        )
+        value(
+            {{name | q}},
+            {{db_id | q}},
+            {{type | q}},
+            {{package_bean | q}},
+            {{package_dao | q}},
+            {{package_service | q}},
+            {{package_service_impl | q}},
+            {{package_dao_test | q}},
+            {{package_service_test | q}},
+            {{name_bean | q}},
+            {{name_dao | q}},
+            {{name_service | q}},
+            {{name_service_impl | q}},
+            {{name_mapper | q}},
+            {{now | d}}
+        )
+    </insert>
+
+    <select id="isUnique">
+        select
+            count(1)
+        from
+            project
+        where
+            {{name | eq:'name'}}
+            {{id | and:'id','!='}}
+    </select>
+
+
+    <select id="pageQuery">
+        select
+            t1.*
+        from
+            project t1
+        where
+            1 = 1
+            {{name | and:'t1.name'}}
+            {{db_id | and:'t1.db_id'}}
+            {{type | and:'t1.type'}}
+            {{package_bean | and:'t1.package_bean'}}
+            {{package_dao | and:'t1.package_dao'}}
+            {{package_service | and:'t1.package_service'}}
+            {{package_service_impl | and:'t1.package_service_impl'}}
+            {{package_dao_test | and:'t1.package_dao_test'}}
+            {{package_service_test | and:'t1.package_service_test'}}
+            {{name_bean | and:'t1.name_bean'}}
+            {{name_dao | and:'t1.name_dao'}}
+            {{name_service | and:'t1.name_service'}}
+            {{name_service_impl | and:'t1.name_service_impl'}}
+            {{name_mapper | and:'t1.name_mapper'}}
+            {{sort | orderBy}}
+            {{offset | limit:pageSize}}
+    </select>
+
+    <select id="pageCount">
+        select
+            count(1)
+        from
+            project t1
+        where
+            1 = 1
+            {{name | and:'t1.name'}}
+            {{db_id | and:'t1.db_id'}}
+            {{type | and:'t1.type'}}
+            {{package_bean | and:'t1.package_bean'}}
+            {{package_dao | and:'t1.package_dao'}}
+            {{package_service | and:'t1.package_service'}}
+            {{package_service_impl | and:'t1.package_service_impl'}}
+            {{package_dao_test | and:'t1.package_dao_test'}}
+            {{package_service_test | and:'t1.package_service_test'}}
+            {{name_bean | and:'t1.name_bean'}}
+            {{name_dao | and:'t1.name_dao'}}
+            {{name_service | and:'t1.name_service'}}
+            {{name_service_impl | and:'t1.name_service_impl'}}
+            {{name_mapper | and:'t1.name_mapper'}}
+    </select>
+
+    <select id="all">
+        select 
+            id,name
+        from
+            project
+    </select>
+
+    <select id="get">
+        select
+            *
+        from
+            project
+        where
+            {{id | eq:'id'}}
+    </select>
+</sql>

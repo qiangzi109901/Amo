@@ -2,26 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{page}}</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1460787240_0293655.css" />
+    <title>代码神器</title>
+    <link rel="shortcut icon" href="/img/fast.png" type="image/x-icon" />
     <link rel="stylesheet" href="/lib/select2/select2.min.css" />
-    <link rel="stylesheet" href="/lib/select2/select2.thrones.css" />
     <link rel="stylesheet" href="/lib/pagination/mypage.css" />
     <link rel="stylesheet" href="/lib/plugin/frame/jquery.window.css" />
+    <link href="/lib/select2/mini.shadow.css" rel="stylesheet"/>
+    <link href="/lib/prism/prism.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/home.css" />
     <script src="/lib/require.js"></script>
-    <script src="/lib/require_config.js?v=2"></script>
+    <script src="/lib/require_config.js?v=3"></script>
 </head>
 <body>
-    <div id="header">
-        <h2 id="logo_title">Thrones</h2>
-
-        <div id="user_info">
-            <a href="/exit" id="exit">退出系统</a>
-            <a href="/index">首页</a>
-            <a>{{session.name}}</a>
+    <header>
+        <div id="nav">
+            <a href="/code">代码神器</a>
+            <a href="/table">建表利器</a>
+            <a href="/project/open">我的项目</a>
+            <a href="/admin/db" target="_db">管理中心</a>
         </div>
-    </div>
-    <div id="containers">
-        <div id="contents">
-
+    </header>
+    <section class="container">

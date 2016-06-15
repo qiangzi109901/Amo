@@ -1,0 +1,32 @@
+
+import java.util.Date;
+public class Tag{
+        private Integer id;
+        private String name;
+        private Integer pid;
+        private Integer language;
+        public void setId(Integer id){
+            this.id = id;
+        }
+        public Integer getId(){
+            return this.id;
+        }
+        public void setName(String name){
+            this.name = name;
+        }
+        public String getName(){
+            return this.name;
+        }
+        public void setPid(Integer pid){
+            this.pid = pid;
+        }
+        public Integer getPid(){
+            return this.pid;
+        }
+        public void setLanguage(Integer language){
+            this.language = language;
+        }
+        public Integer getLanguage(){
+            return this.language;
+        }
+}

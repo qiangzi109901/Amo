@@ -1,0 +1,40 @@
+require(['dialog','frame','message']);
+define('Tag',['admin/common','jquery','util','comjax','mtemplate','mselect2','casecade','pager'],function(common,$,util,comjax,mtemplate,mselect2,casecade){
+    var Tag = {
+        config : {
+            model : 'tag',
+            url : {
+                add : '/data/tag/insert',
+                update : '/data/tag/update',
+                delete : '/data/tag/delete'
+            },
+            search : {
+                page : 1,
+                pageSize : 10
+            }
+        },
+        init : function(){
+            this.initSelect();
+            this.initPager();
+            common.bindA(this);
+            common.bindS(this);
+            common.search(this);
+        },
+        initPager : function(){
+            window.pager = new Pager("#mypage",{
+                fnJump : function(page){
+                    common.search(Tag, page);
+                }
+            });
+        },
+        initSelect : function(){
+        },
+        search : function(){
+            common.search(Tag);
+        }
+    }
+    return Tag;
+});
+require(['Tag'],function(Tag){
+    Tag.init();
+});

@@ -3,11 +3,11 @@
     
     <insert id="insert" before="isUnique">
         insert into 
-            db_config(name,host,user,passwd,dbname,prefix,port,gmt_create)
+            db_config(name,host,username,passwd,dbname,prefix,port,gmt_create)
         values(
             {{name | q}},
             {{host | q}},
-            {{user | q}},
+            {{username | q}},
             {{passwd | q}},
             {{dbname | q}},
             {{prefix | q}},
@@ -66,5 +66,33 @@
             db_config
         where
             {{val | eq:'host'}}
+    </select>
+
+    <select id="getOneByHost">
+        select
+            *
+        from
+            db_config
+        where
+            {{host | eq:'host'}}
+        limit 1
+    </select>
+
+    <select id="getById">
+        select
+            *
+        from
+            db_config
+        where
+            {{id | eq:'id'}}
+    </select>
+
+    <select id="get">
+        select
+            *
+        from
+            db_config
+        where
+            {{id | eq:'id'}}
     </select>
 </sql>

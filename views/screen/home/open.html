@@ -1,0 +1,96 @@
+
+
+<section id="project_content">
+		
+	<nav id="side_catalog">
+		<div id="side_catalog_content"></div>
+		<div id="side_totop">⇡</div>
+	</nav>
+
+	<div id="main_content">
+
+		<div id="code_content">
+			<span id="btn_copy" data-clipboard-target="#file_code">copy</span>
+			<pre><code id="file_code"></code></pre>
+		</div>
+		<div id="info_content">
+
+		</div>
+	</div>
+	<nav id="side_project">
+		<ul>
+			{{each projects as project}}
+				<li>
+					<a class="project_make" data-id="{{project.id}}">⟳</a>
+					<a class="project_item" data-id="{{project.id}}">{{project.name}}</a>
+				</li>
+			{{/each}}
+			<li>
+				<a href="/project/new">New project</a>
+			</li>
+		</ul>	
+	</nav>
+
+</section>
+
+
+
+<script type="text/html" id="temp_info_java">
+	<div class="form_line">
+		<label>项目名称</label>
+		<label>[[name]]</label>
+	</div>
+	<div class="form_line">
+		<label>Bean名称</label>
+		<label>[[name_bean]]</label>
+	</div>
+	<div class="form_line">
+		<label>Bean所在包名</label>
+		<label>[[package_bean]]</label>
+	</div>
+	<div class="form_line">
+		<label>Dao名称</label>
+		<label>[[name_dao]]</label>
+	</div>
+	<div class="form_line">
+		<label>Dao所在包名</label>
+		<label>[[package_dao]]</label>
+	</div>
+	<div class="form_line">
+		<label>Service名称</label>
+		<label>[[name_service]]</label>
+	</div>
+	<div class="form_line">
+		<label>Service所在包名</label>
+		<label>[[package_service]]</label>
+	</div>
+	<div class="form_line">
+		<label>ServiceImpl名称</label>
+		<label>[[name_service_impl]]</label>
+	</div>
+	<div class="form_line">
+		<label>ServiceImpl所在包名</label>
+		<label>[[package_service_impl]]</label>
+	</div>
+	<div class="form_line">
+		<label>DaoTest所在包名</label>
+		<label>[[package_dao_test]]</label>
+	</div>
+</script>
+
+
+<script type="text/html" id="temp_menus">
+	[[each catalogs as catalog]]
+	<dl>
+		<dt class="menu_catalog">[[catalog.catalog]]</dt>
+		<dd>
+			[[each catalog.files as file]]
+				<a class="menu_file" data-id="[[file.id]]" >[[file.name]]</a>
+			[[/each]]
+		</dd>
+	</dl>
+	[[/each]]
+</script>
+
+<input type="hidden" id="page_method" value="initOpen">
+<script type="text/javascript" src="/js/home/project.js"></script>

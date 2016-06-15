@@ -1,0 +1,136 @@
+<link href="/lib/select2/mini.shadow.css" rel="stylesheet"/>
+<div class="frame">
+    <form id="aForm">
+        <div class="form_line">
+            <label>选择库</label>
+            <select id="aHost" name="host" class="myselect select2" placeholder="选择主机"></select>
+            <select id="aDb" name="db_id" class="myselect select2" placeholder="选择库" noresult="请先选择主机"></select>
+        </div>
+
+        <div class="form_line">
+            <label>项目类型</label>
+            <select id="aType" name="type" class="myselect select2" placeholder="选择项目类型">
+                <option value=""></option>
+                <option value="NODE">NODE项目</option>
+                <option value="JAVA">JAVA项目</option>
+            </select>
+        </div>
+
+        <div class="form_line">
+            <label>项目名称</label>
+            <input type="text" class="minput" name="name"/>
+        </div>
+
+        <div id="java_form" class="hidden">
+
+            <div class="form_line">
+                <label>基础包名</label>
+                <input type="text" id="base_package" class="minput" />
+            </div>
+
+            <div class="form_line">
+                <table>
+                    <tr>
+                        <td>
+                            <label>Bean名</label>
+                        </td>
+                        <td>
+                            <input type="text" class="minput" name="name_bean" value="DO"/>
+                        </td>
+                        <td>
+                            <label>所在包名</label>
+                        </td>
+                        <td>
+                            <input type="text" class="minput w300 package_input" value=".model" name="package_bean"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="form_line">
+                <table>
+                    <tr>
+                        <td>
+                            <label>DAO名</label>
+                        </td>
+                        <td>
+                            <input type="text" class="minput" name="name_dao" value="Dao"/>
+                        </td>
+                        <td>
+                            <label>所在包名</label>
+                        </td>
+                        <td>
+                            <input type="text" class="minput w300 package_input" value=".dao" name="package_dao"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="form_line">
+                <table>
+                    <tr>
+                        <td>
+                            <label>Service名</label>
+                        </td>
+                        <td>
+                            <input type="text" class="minput" name="name_service" value="Service"/>
+                        </td>
+                        <td>
+                            <label>所在包名</label>
+                        </td>
+                        <td>
+                            <input type="text" class="minput w300 package_input" value=".service" name="package_service"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="form_line">
+                <table>
+                    <tr>
+                        <td>
+                            <label>ServiceImpl名</label>
+                        </td>
+                        <td>
+                            <input type="text" class="minput" name="name_service_impl" value="ServiceImpl"/>
+                        </td>
+                        <td>
+                            <label>所在包名</label>
+                        </td>
+                        <td>
+                            <input type="text" class="minput w300 package_input" value=".service.impl" name="package_service_impl"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="form_line">
+                <table>
+                    <tr>
+                        <td>
+                            <label>DaoTest包名</label>
+                        </td>
+                        <td>
+                            <input type="text" class="minput package_input" value=".test.dao" name="package_dao_test" />
+                        </td>
+                        <td>
+                            <label>ServiceTest包名</label>
+                        </td>
+                        <td>
+                            <input type="text" class="minput w300 package_input" value=".test.service" name="package_dao_test" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </form>
+
+    <div class="form_line">
+        <a class="mbtn" id="aSubmit">提交</a>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/js/home/project.js"></script>

@@ -24,17 +24,58 @@ define(['template'],function(template){
 
 
 
+
+    template.helper('mvalue', function(item){
+        if(/^\d+$/.test(item.value)){
+            return item.value;
+        }
+        return '"' + item.value + '"';
+    });
+
+    template.helper('comma', function(items, index, tag){
+        tag = tag || ",";
+        return items.length - 1 > index ? tag : '';
+    });
+
+    function htmlEscape(str) {
+        return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+    }
+
+
+    function compress(str){
+        return String(str)
+                .replace(/\s\s*/g, ' ')
+                .replace(/ \"/g,'"')
+                .replace(/\" /g,'"')
+    }
+
     template.config('openTag','[[');
     template.config('closeTag',']]');
 
     return {
-        T : function(id,data){
+        render : function(id,data){
             return template(id,data);
+        },
+        htmlEscape : function(source){
+            return htmlEscape(source);
+        },
+        removeBlankLine : function(source){
+            return source.replace(/\n\s*\n/g,'\n');
+        },
+        makeNewLine : function(source, tag, rep){
+            var regexp = new RegExp(tag,"gm");
+            rep = rep || (tag + "\n");
+            return source.replace(regexp, rep);
         },
         compile : function(source,data){
             return template.compile(source)(data);
         }
     }
+
+
 
 
 });

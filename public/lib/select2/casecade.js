@@ -5,11 +5,12 @@ define(['jquery','mselect2'],function($,mselect2){
     var CasecadeSelect = {
         init : function(opts){
             var settings = $.extend({
-                length : 3,
+                length : 2,
                 ids : [],
                 urls : [],
-                defaultMsgs : [],
+                defaultMsgs : ['','',''],
                 checked : [],
+                triggerDepth : 2,
                 cb : null
             },opts||{});
             var isInit = false;
@@ -43,22 +44,22 @@ define(['jquery','mselect2'],function($,mselect2){
                                 isInit = true
                             }
                         }
-                        mselect2.triggerChange(settings.ids[1]);
-                        console.log("2 is changed")
-
+                        //mselect2.triggerChange(settings.ids[1]);
                     });
                 });
 
                 if(checkedLen>0){
                     mselect2.val(settings.ids[0], settings.checked[0]);
-                    mselect2.triggerChange(settings.ids[0])
+                    // mselect2.triggerChange(settings.ids[0]);
+                    console.log("trigger 1")
                 }
             });
 
             //初始化2
             mselect2.renderAndBind(settings.ids[1],function(val){
+                console.log("trigger 2")
                 if(len == 2){
-                    settings.cb && settings.cb();
+                    mcb();
                 }
                 else{
                     if(val<=0){
@@ -77,22 +78,33 @@ define(['jquery','mselect2'],function($,mselect2){
                                 isInit = true
                             }
                         }
-                        mselect2.triggerChange(settings.ids[2]);
-                        console.log("3 is changed")
+                        //mselect2.triggerChange(settings.ids[2]);
                     });
                 }
             });
 
-
-
             //初始化3
             if(len >= 3){
                 mselect2.renderAndBind(settings.ids[2], function(){
-                    console.log("3333")
                     if(len == 3){
-                        settings.cb && settings.cb();
+                        mcb();
                     }
+                    console.log("trigger 3")
                 });
+            }
+
+            function mcb(){
+                var triggerDepth = settings.triggerDepth;
+                if(triggerDepth == 'all' || triggerDepth == 0){
+                    settings.cb && settings.cb(settings.ids);
+                }
+                else{
+                    var val = $(settings.ids[settings.length-1]).val();
+                    console.log(val);
+                    if(val != '' && val != null){
+                        settings.cb && settings.cb(val);
+                    }
+                }
             }
         },
         post : function(url,data,cb){

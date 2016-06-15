@@ -67,7 +67,7 @@ define(['jquery','comjax','select2'],function($,comjax){
             }
         },
         getDefault : function(msg,data, val){
-            if(0 != val){
+            if(0 != val && val != ""){
                 val = 'all';
             }
             var result = [{'id': val,'text':msg}];
@@ -102,8 +102,20 @@ define(['jquery','comjax','select2'],function($,comjax){
         },
         val : function(id, value){
             if(this.isSelect2(id)){
-                $(id).select2('val', value);
+                if(typeof value == "undefined"){
+                    var v = $(id).val();
+                    if(v == 'all'){
+                        return '';
+                    }
+                    return v || '';
+                }
+                else{
+                    $(id).select2('val', value);
+                }
             }
+        },
+        text : function(id){
+            return $("#select2-" + id + "-container").text();
         }
     }
 });

@@ -3,11 +3,12 @@
 
     <insert id="insert">
         insert into
-            temp_catalog(name,lang,pid)
+            temp_catalog(name,lang,pid,filename)
         value(
             {{name | q}},
             {{lang | q}},
-            {{pid | q}}
+            {{pid | q}},
+            {{filename | q}}
         )
     </insert>
 
@@ -78,10 +79,18 @@
         set
             {{name | eq:'name'}},
             {{lang | eq:'lang'}},
-            {{pid | eq:'pid'}}
+            {{pid | eq:'pid'}},
+            {{filename | eq:'filename'}}
         where
             {{id | eq:'id'}}
     </update>
 
-
+    <select id="getFileName">
+        select
+            filename
+        from
+            temp_catalog
+        where
+            {{id | eq:'id'}}
+    </select>
 </sql>

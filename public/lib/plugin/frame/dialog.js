@@ -32,6 +32,7 @@ define(['jquery','tool'],function($,tool){
 		var Frame = {
 			//初始化
 			init : function() {
+				Frame.id = _this.attr('id');
 				if(_default.title){
 					_this.find(".mywindow_title").html(_default.title);
 				}

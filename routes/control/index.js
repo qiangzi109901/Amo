@@ -2,12 +2,7 @@
 var print = require('mprint');
 
 exports.index = function(req,res){
-    print.ps("ssss")
-    req.models.test.add({
-        "name" : "11",
-        "password" : "333333",
-        "gender" : "222"
-    },res);
+    res.renderPage("index")
 }
 
 exports.page404 = function(req,res){
@@ -17,6 +12,7 @@ exports.page404 = function(req,res){
 exports.page500  = function(req,res){
     res.render('error',{"message":"My God,服务器出错了"});
 }
+
 
 exports.auto = function(req,res){
     res.renderPage(req.originalUrl);

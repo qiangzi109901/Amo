@@ -1,0 +1,101 @@
+
+<!--模态框-->
+<div class="mywindow" id="aModal">
+    <div class="mywindow_head">
+        <span class="mywindow_title">添加库</span>
+        <span class="mywindow_close_btn">✕</span>
+    </div>
+    <div class="mywindow_body">
+        <form id="aForm">
+            <table class="table_window">
+                <tbody>
+                <tr>
+                    <td>主机</td>
+                    <td>
+                        <input type="text" class="minput w150" placeholder="127.0.0.1" name="host" id="aHost"/>
+                    </td>
+                    <td>
+                        <input type="text" class="minput w80" placeholder="port:3306" name="port" id="aPort"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>身份</td>
+                    <td>
+                        <input type="text" class="minput w150" name="username" placeholder="username" id="aUsername"/>
+                    </td>
+                    <td>
+                        <input type="text" class="minput w150" name="passwd" placeholder="passwd" id="aPassword"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>库名</td>
+                    <td>
+                        <input type="text" class="minput w150" name="dbname" placeholder="database" id="aDbname"/>
+                    </td>
+                    <td>
+                        <input type="text" class="minput w150" name="name" placeholder="中文名称" id="aName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>前缀</td>
+                    <td>
+                        <input type="text" class="minput w150" name="prefix" placeholder="prefix" id="mPrefix"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="mywindow_foot">
+        <span class="mywindow_btn mywindow_cancel_btn">取消</span>
+        <span class="mywindow_btn mywindow_sure_btn">测试并连接</span>
+    </div>
+</div>
+
+
+
+<!--模态框-->
+<div class="mywindow" id="rModal">
+    <div class="mywindow_head">
+        <span class="mywindow_title">刷新库</span>
+        <span class="mywindow_close_btn">✕</span>
+    </div>
+    <div class="mywindow_body">
+        <form id="rForm">
+            <table class="table_window">
+                <tbody>
+                <tr>
+                    <td>主机</td>
+                    <td>
+                        <select  id="rHost" class="myselect select2" name="host" placeholder="请选择主机" noresult="主机为空"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>数据库</td>
+                    <td>
+                        <select  id="rDb" class="myselect select2" name="dbId" placeholder="请选择数据库" noresult="请先选择主机" default_msg="请选择数据库" default_val=""></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>数据表</td>
+                    <td>
+                        <select  id="rTb" class="myselect select2" name="tbId" placeholder="请选择数据表" noresult="请先选择数据库" default_msg="请选择数据库" default_val=""></select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>前缀</td>
+                    <td>
+                        <input type="text" class="minput w150" name="prefix" placeholder="prefix" id="rPrefix"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="mywindow_foot">
+        <span class="mywindow_btn mywindow_cancel_btn">取消</span>
+        <span class="mywindow_btn mywindow_sure_btn">测试并刷新</span>
+    </div>
+</div>
+

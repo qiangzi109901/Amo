@@ -19,6 +19,12 @@ module.exports = {
         },
         'description' : {
             required : {val:true,message:'描述不能为空'}
+        },
+        'lang' : {
+            required : {val : true,message:'模板语言不能为空'}
+        },
+        'compress' : {
+            required : {val : false,message:'是否去掉空行必须选择'}
         }
     }
 }
